@@ -91,13 +91,10 @@ public class RailFenceCipher {
 
         int index = 0;
 
-        // check if the current element contains '#' and whether index < colum
-        // that is whether the character we are accessing is within the range
-        // as
-        // index = 0
-        // column = length of the string - No need i believe
+        // check if the current element contains '#'
         for (int i = 0; i < row; i++) {
             for (int k = 0; k < column; k++) {
+                // if the character is '#'
                 if (a[i][k] == '#') {
                     // Here we replace the '#' to correct characters
                     // assign the encrypted text each character - placing the characters
@@ -105,10 +102,6 @@ public class RailFenceCipher {
                 }
             }
         }
-
-        // resetting j and check to reuse correctly
-        j = 0;
-        check = false;
 
         // here we go through in the same path as depth for encryption
         // loop through each column
@@ -141,11 +134,11 @@ public class RailFenceCipher {
         sc.close();
         if (key >= text.length()) {
             System.out.println(
-                    "Encrption and decryption is the same as entered text. Please enter the key (i.e) depth less than the given character length");
+                    "Encrption and decryption is the same as entered text. Please enter the key (i.e) depth less than the given character length \n");
         } else {
             String encryptedText = encryption(text, key);
-            System.out.println("Encrypted message:" + encryptedText);
-            System.out.println("Decrypted message:" + decryption(encryptedText, key));
+            System.out.println("Encrypted message:" + encryptedText + "\n");
+            System.out.println("Decrypted message:" + decryption(encryptedText, key) + "\n");
         }
     }
 }
