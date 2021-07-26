@@ -55,7 +55,7 @@ public class RailFenceCipher {
         int row = key, column = text.length();
         char[][] a;
 
-        // 2d matrix characters mapperd to the given depth
+        // 2d matrix characters mapped to the given depth
         a = placeCharactersWithGivenDepth(mapTo, text, key);
 
         // loop through every row
