@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class PFEncryption {
+class PFEncryptionDecryption {
 
     char[][] alphabets = new char[5][5];
     char[] uniqueChar = new char[26];
@@ -8,22 +8,13 @@ class PFEncryption {
     String encrypted = "";
     String decrypted = "";
 
-    public void makeArray(String keyword) {
+    public void createArray(String keyword) {
         keyword = keyword.toUpperCase().replace("J", "I");
         boolean present;
-        // terminate = false;
         int val = 0;
-        // int uniqueLen;
         for (int i = 0; i < keyword.length(); i++) {
             present = false;
-            // uniqueLen = 0;
             if (keyword.charAt(i) != ' ') {
-                // for (int k = 0; k < uniqueChar.length; k++) {
-                //     if (Character.toString(uniqueChar[k]) == null) {
-                //         break;
-                //     }
-                //     // uniqueLen++;
-                // }
                 for (int j = 0; j < uniqueChar.length; j++) {
                     if (keyword.charAt(i) == uniqueChar[j]) {
                         present = true;
@@ -53,7 +44,7 @@ class PFEncryption {
         }
     }
 
-    String manageMessage(String msg) {
+    public String createMessage(String msg) {
         int val = 0;
         int len = msg.length() - 2;
         String newTxt = "";
@@ -75,17 +66,17 @@ class PFEncryption {
         return msg.toUpperCase().replaceAll("J", "I").replaceAll(" ", "");
     }
 
-    void doPlayFair(String msg, String tag) {
+    void playFair(String msg, String process) {
         int val = 0;
         while (val < msg.length()) {
-            searchAndEncryptOrDecrypt(msg.substring(val, val + 2), tag);
+            searchAndEncryptOrDecrypt(msg.substring(val, val + 2), process);
             val += 2;
         }
     }
 
-    void searchAndEncryptOrDecrypt(String doubblyCh, String tag) {
-        char ch1 = doubblyCh.charAt(0);
-        char ch2 = doubblyCh.charAt(1);
+    void searchAndEncryptOrDecrypt(String doubleChar, String process) {
+        char ch1 = doubleChar.charAt(0);
+        char ch2 = doubleChar.charAt(1);
         int row1 = 0, col1 = 0, row2 = 0, col2 = 0;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -98,9 +89,9 @@ class PFEncryption {
                 }
             }
         }
-        if (tag == "Encrypt")
+        if (process == "Encrypt")
             encrypt(row1, col1, row2, col2);
-        else if (tag == "Decrypt")
+        else if (process == "Decrypt")
             decrypt(row1, col1, row2, col2);
     }
 
@@ -167,14 +158,14 @@ public class PlayFairCipher {
         System.out.print("Enter message to encrypt: ");
         String msg = sc.nextLine();
         sc.close();
-        PFEncryption pfEncryption = new PFEncryption();
-        pfEncryption.makeArray(key);
-        msg = pfEncryption.manageMessage(msg);
-        pfEncryption.doPlayFair(msg, "Encrypt");
-        String en = pfEncryption.getEncrypted();
+        PFEncryptionDecryption pf = new PFEncryptionDecryption();
+        System.out.println("Generated array");
+        pf.createArray(key);
+        msg = pf.createMessage(msg);
+        pf.playFair(msg, "Encrypt");
+        String en = pf.getEncrypted();
         System.out.println("Encrypting....\n\nThe encrypted text is: " + en);
-        System.out.println("=======================================");
-        pfEncryption.doPlayFair(en, "Decrypt");
-        System.out.print("\nDecrypting....\n\nThe decrypted text is: " + pfEncryption.getDecrypted());
+        pf.playFair(en, "Decrypt");
+        System.out.print("\nDecrypting....\n\nThe decrypted text is: " + pf.getDecrypted());
     }
 }

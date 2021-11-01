@@ -2,10 +2,6 @@ import java.util.Scanner;
 
 public class CaesarCipher {
 
-    public static boolean validateString(String str) {
-        return ((!str.equals("")) && (str != null) && (str.matches("^[a-zA-Z]*$")));
-    }
-
     public static String caeserEncryptDecrypt(String encryptOrDecrypt, String text, int shifts) {
 
         if (encryptOrDecrypt.equals("decrypt")) {
@@ -33,17 +29,13 @@ public class CaesarCipher {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter a string to encrypt (Ceaser Cipher): ");
-        String text = sc.nextLine();
+        String text = sc.nextLine().replaceAll(" ", "");
         System.out.println("Enter the number of shift that you desire: ");
         int shifts = sc.nextInt();
         sc.close();
-        if (validateString(text)) {
-            String encryptedText = caeserEncryptDecrypt("encrypt", text, shifts).toString();
-            String decryptedText = caeserEncryptDecrypt("decrypt", encryptedText, shifts).toString();
-            System.out.println("Encrypted text: " + encryptedText);
-            System.out.println("Decrypted text: " + decryptedText);
-        } else
-            System.out.println("Please enter all the text in alphabets !");
+        String encryptedText = caeserEncryptDecrypt("encrypt", text, shifts).toString();
+        String decryptedText = caeserEncryptDecrypt("decrypt", encryptedText, shifts).toString();
+        System.out.println("Encrypted text: " + encryptedText);
+        System.out.println("Decrypted text: " + decryptedText);
     }
-
 }
